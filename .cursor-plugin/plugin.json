@@ -1,0 +1,15 @@
+{
+  "name": "bubblav",
+  "displayName": "BubblaV",
+  "version": "1.0.0",
+  "description": "Connect Cursor to your BubblaV AI chatbot. Search your knowledge base, read analytics, find content gaps, manage conversations and leads, and tune your chatbot persona — over OAuth, no API key needed.",
+  "author": {
+    "name": "BubblaV",
+    "email": "support@bubblav.com"
+  },
+  "homepage": "https://www.bubblav.com",
+  "repository": "https://github.com/bubblav-org/bubblav-cursor",
+  "license": "MIT",
+  "keywords": ["bubblav", "chatbot", "mcp", "customer-support", "analytics", "knowledge-base", "lead-generation"],
+  "logo": "assets/logo.svg"
+}
