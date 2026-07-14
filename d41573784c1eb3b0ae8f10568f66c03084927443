@@ -1,0 +1,29 @@
+.cursor-plugin/plugin.json
+  s_8ced9c696d2185::t_69fb8af2361e01 1-15
+LICENSE
+  s_8ced9c696d2185::t_ec7cdaf991cca0 1-21
+README.md
+  s_8ced9c696d2185::t_b3c8654bc1c80b 1-61
+assets/logo.svg
+  s_8ced9c696d2185::t_6e670af1817daf 1-13
+mcp.json
+  s_8ced9c696d2185::t_8744064ad0129c 1-7
+scripts/validate-plugin.mjs
+  s_8ced9c696d2185::t_003a48605f6630 1-99
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "d41573784c1eb3b0ae8f10568f66c03084927443",
+  "prompts": {},
+  "sessions": {
+    "s_8ced9c696d2185": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dd1f2fef-9e29-4410-9919-ec1354b0b608",
+        "model": "glm-5.2"
+      },
+      "human_author": "Ton Nguyen <tonng86@gmail.com>"
+    }
+  }
+}
