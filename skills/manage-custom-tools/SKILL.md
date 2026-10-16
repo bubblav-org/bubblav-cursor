@@ -150,8 +150,12 @@ When creating a tool, choose `authentication_type` based on how the user's webho
   ```
 - **The user must**: store the `secret_key` server-side and validate the header. Example (Node.js):
   ```javascript
-  const token = req.headers.authorization?.split(' ')[1];
-  if (token !== process.env.BUBBLAV_SECRET_KEY) return res.status(401).json({ error: 'Invalid token' });
+  // secretKey: the secret_key BubblaV returned when the tool was created,
+  // loaded from the endpoint's own secret store.
+  function isFromBubblaV(req, secretKey) {
+    const token = req.headers.authorization?.split(' ')[1];
+    return token === secretKey;
+  }
   ```
 
 ### `hmac` — HMAC Signature (most secure)
@@ -165,13 +169,17 @@ When creating a tool, choose `authentication_type` based on how the user's webho
 - **The user must**: store the `secret_key` and verify the signature + timestamp server-side. Example (Node.js):
   ```javascript
   const crypto = require('crypto');
-  const sig = req.headers['x-bubblav-signature']?.replace('sha256=', '');
-  const ts = req.headers['x-bubblav-timestamp'];
-  // Reject requests older than 5 minutes (replay protection)
-  if (Date.now() - parseInt(ts) > 300000) return res.status(401).json({ error: 'Expired' });
-  const expected = crypto.createHmac('sha256', process.env.BUBBLAV_SECRET_KEY)
-    .update(`${ts}.${JSON.stringify(req.body)}`).digest('hex');
-  if (sig !== expected) return res.status(401).json({ error: 'Invalid signature' });
+  // secretKey: the secret_key BubblaV returned when the tool was created,
+  // loaded from the endpoint's own secret store.
+  function isFromBubblaV(req, secretKey) {
+    const sig = req.headers['x-bubblav-signature']?.replace('sha256=', '');
+    const ts = req.headers['x-bubblav-timestamp'];
+    // Reject requests older than 5 minutes (replay protection)
+    if (Date.now() - parseInt(ts) > 300000) return false;
+    const expected = crypto.createHmac('sha256', secretKey)
+      .update(`${ts}.${JSON.stringify(req.body)}`).digest('hex');
+    return sig === expected;
+  }
   ```
 
 ### Recommendations
